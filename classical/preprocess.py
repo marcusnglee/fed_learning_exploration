@@ -21,10 +21,10 @@ print("num missing after dropping NA: " + str(df.isna().sum().sum()))
 
 
 # features we want to work with
-audio_features = ['danceability', 'energy', 'valence', 'loudness',                    
+feature_columns = ['danceability', 'energy', 'valence', 'loudness',                    
                   'speechiness', 'acousticness', 'instrumentalness',                  
                   'liveness', 'tempo', 'duration_ms']
-X = df[audio_features].values
+X = df[feature_columns].values
 y = df['track_genre'].values   
 
 # convert genre labels to numbers! 0 - 113
@@ -44,7 +44,7 @@ X_val_scaled = scaler.transform(X_val)
 
 # Display mean and std for each feature
 print("\n=== Scaler Statistics ===")
-for i, feature_name in enumerate(audio_features):
+for i, feature_name in enumerate(feature_columns):
     print(f"{feature_name:20} | Mean: {scaler.mean_[i]:10.4f} | Std: {scaler.scale_[i]:10.4f}")                                     
 
 # Save raw cleaned data
@@ -62,4 +62,4 @@ np.save('data/processed/y_train.npy', y_train)
 np.save('data/processed/y_test.npy', y_test)
 np.save('data/processed/y_val.npy', y_val)
 
-print(f"\n✓ Saved {X_train_scaled.shape[0]} train, {X_test_scaled.shape[0]} test, {X_val_scaled.shape[0]} val samples")
+print(f"\nSaved {X_train_scaled.shape[0]} train, {X_test_scaled.shape[0]} test, {X_val_scaled.shape[0]} val samples")
